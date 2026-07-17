@@ -32,8 +32,8 @@ export default function TeacherExamsPage() {
           </div>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <button className="btn-primary"><PlayCircle size={16} /> Start Exam</button>
-            <button className="btn-secondary"><StopCircle size={16} /> Quit All</button>
+            <button className="btn-primary"><PlayCircle size={16} /> Start Monitoring Session</button>
+            <button className="btn-secondary"><StopCircle size={16} /> End Monitoring Session</button>
           </div>
         </div>
 
