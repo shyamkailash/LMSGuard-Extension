@@ -198,7 +198,7 @@ export default function DashboardLayout({
       </div>
 
       <AlertPopup alert={alertCurrent} onClose={handleAlertClose}
-        onViewStudent={a => { router.push(`/monitoring?s=${a.studentId}`); handleAlertClose(); }}
+        onViewStudent={a => { router.push(`/teacher/monitoring?s=${a.studentId}`); handleAlertClose(); }}
         onIgnore={handleAlertClose} onRemark={handleAlertClose}/>
 
       <NetworkIssuePopup issue={netIssue} onClose={handleNetClose}

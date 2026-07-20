@@ -96,15 +96,6 @@ export interface AvailableExam {
   eligibleClasses: string[];
 }
 
-// ─── Admin ────────────────────────────────────────────────────────────────────
-export interface AdminAccount {
-  id: string;
-  name: string;
-  email: string;
-  avatar: string;
-  role: string;
-}
-
 export interface Department {
   id: string;
   name: string;
@@ -122,41 +113,6 @@ export interface SchoolClass {
   year: string;
   section: string;
   strength: number;
-}
-
-export interface AdminStudent {
-  id: string;
-  name: string;
-  regno: string;
-  email: string;
-  dept: string;
-  class: string;
-  status: "active" | "flagged";
-  risk: number;
-}
-
-export interface AdminInvigilator {
-  id: string;
-  name: string;
-  email: string;
-  dept: string;
-  status: "active" | "inactive";
-  permissions: string[];
-  exams: string[];
-}
-
-export interface AdminExam {
-  id: string;
-  title?: string;
-  name?: string;
-  subject: string;
-  code: string;
-  date: string;
-  dept: string;
-  classes: string[];
-  duration: number;
-  questions: number;
-  status: "active" | "scheduled";
 }
 
 export interface MonitoringSession {

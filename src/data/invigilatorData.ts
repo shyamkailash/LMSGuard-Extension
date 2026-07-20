@@ -1,4 +1,4 @@
-import type { InvigilatorProfile, AvailableClass, AvailableExam, AdminAccount, Department, SchoolClass, AdminStudent, AdminInvigilator, AdminExam, MonitoringSession, SystemStats } from "@/types";
+import type { InvigilatorProfile, AvailableClass, AvailableExam, Department, SchoolClass, MonitoringSession, SystemStats } from "@/types";
 /**
  * LMSGuard AI — Invigilator Data
  *

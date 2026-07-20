@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard, Monitor, BarChart3,
-  ChevronLeft, ChevronRight, Shield, Zap, BookOpen, Rocket
+  ChevronLeft, ChevronRight, Shield, Zap, BookOpen
 } from "lucide-react";
 
 const NAV = [
@@ -12,7 +12,6 @@ const NAV = [
   { label:"Exams",      href:"/teacher/exams",     icon:BookOpen        },
   { label:"Monitoring", href:"/teacher/monitoring", icon:Monitor        },
   { label:"Reports",    href:"/teacher/reports",    icon:BarChart3       },
-  { label:"Student Launcher", href:"/student/launcher", icon:Rocket       },
 ];
 
 export default function Sidebar({
