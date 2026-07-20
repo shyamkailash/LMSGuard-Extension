@@ -192,7 +192,7 @@ export default function TeacherDashboardPage() {
                 <ShieldCheck size={16} /> Save Config
               </button>
               <button className="btn-primary" onClick={startExam}>
-                <PlayCircle size={16} /> Start Exam
+                <PlayCircle size={16} /> Start Monitoring Session
               </button>
               <button className="btn-secondary" onClick={copyGateway}>
                 <Copy size={16} /> Copy Gateway URL

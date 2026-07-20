@@ -32,9 +32,8 @@ export default function SebGatewayPage() {
 
     const verifyAccess = async () => {
       try {
-        const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:8000";
         const res = await fetch(
-          `${BACKEND_URL}/api/seb/gateway/status/${encodeURIComponent(examId)}/${encodeURIComponent(rollNumber)}`,
+          `http://127.0.0.1:8000/api/seb/gateway/status/${encodeURIComponent(examId)}/${encodeURIComponent(rollNumber)}`,
         );
         if (!res.ok) throw new Error(`Request failed with ${res.status}`);
 

@@ -4,14 +4,15 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard, Monitor, BarChart3,
-  ChevronLeft, ChevronRight, LogOut, Shield, Zap, BookOpen
+  ChevronLeft, ChevronRight, Shield, Zap, BookOpen, Rocket
 } from "lucide-react";
 
 const NAV = [
-  { label:"Dashboard",  href:"/teacher/dashboard",  icon:LayoutDashboard },
+  { label:"Teacher Dashboard", href:"/teacher/dashboard", icon:LayoutDashboard },
   { label:"Exams",      href:"/teacher/exams",     icon:BookOpen        },
   { label:"Monitoring", href:"/teacher/monitoring", icon:Monitor        },
   { label:"Reports",    href:"/teacher/reports",    icon:BarChart3       },
+  { label:"Student Launcher", href:"/student/launcher", icon:Rocket       },
 ];
 
 export default function Sidebar({
@@ -110,36 +111,6 @@ export default function Sidebar({
           );
         })}
       </nav>
-
-      {/* ── Logout ── */}
-      <div className="px-2 pb-4 pt-3 shrink-0" style={{ borderTop:"1px solid var(--border)" }}>
-        <Link href="/login">
-          <motion.div whileHover={{ x:collapsed?0:2 }}
-            onClick={() => sessionStorage.clear()}
-            className="sidebar-item group hover:!text-[var(--danger)] hover:!bg-[var(--danger-soft)] relative">
-            <div className="w-7 h-7 rounded-lg flex items-center justify-center transition-all group-hover:bg-[var(--danger-soft)]">
-              <LogOut size={14} style={{ color:"var(--text-muted)" }}/>
-            </div>
-            <AnimatePresence>
-              {!collapsed && (
-                <motion.span initial={{ opacity:0, x:-6 }} animate={{ opacity:1, x:0 }}
-                  exit={{ opacity:0, x:-6 }} transition={{ duration:0.12 }}
-                  className="whitespace-nowrap">
-                  Logout
-                </motion.span>
-              )}
-            </AnimatePresence>
-            {collapsed && (
-              <div className="absolute left-full ml-3 px-3 py-1.5 rounded-xl text-xs font-medium
-                whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100
-                transition-opacity z-50 shadow-lg"
-                style={{ background:"var(--text-primary)", color:"var(--card)" }}>
-                Logout
-              </div>
-            )}
-          </motion.div>
-        </Link>
-      </div>
 
       {/* Collapse button */}
       <motion.button whileHover={{ scale:1.1 }} whileTap={{ scale:0.9 }}
