@@ -1,6 +1,7 @@
 import sqlite3
 import os
 import time
+import calendar
 from typing import Any, Dict, Optional
 
 DB_PATH = os.path.join(os.path.dirname(__file__), "lmsguard.db")
@@ -224,23 +225,13 @@ def get_gateway_status(exam_id: str, roll_number: str) -> Dict[str, Any]:
     # parse heartbeat timestamp and compare
     try:
         hb_time_struct = time.strptime(agent["last_heartbeat"], "%Y-%m-%dT%H:%M:%SZ")
-        hb_seconds = time.mktime(hb_time_struct)
+        hb_seconds = calendar.timegm(hb_time_struct)
     except Exception:
         # if parsing fails, treat as offline
         return {"allowed": False, "reason": "AGENT_OFFLINE"}
 
     if time.time() - hb_seconds > 30:
         return {"allowed": False, "reason": "AGENT_OFFLINE"}
-
-    # 3. Check exam start status
-    conn = get_db()
-    cursor = conn.cursor()
-    cursor.execute("SELECT start_status FROM exam_sessions WHERE exam_id = ?", (exam_id,))
-    exam = cursor.fetchone()
-    conn.close()
-
-    if not exam or exam.get("start_status") != "STARTED":
-        return {"allowed": False, "reason": "WAITING_FOR_INVIGILATOR"}
 
     # 4. All good — return allowed with Moodle URL. Do not leak secrets.
     return {"allowed": True, "moodle_quiz_url": config.get("moodle_quiz_url")}

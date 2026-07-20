@@ -4,9 +4,11 @@ import { AlertTriangle, Camera, Monitor, ShieldCheck, Wifi, Zap } from "lucide-r
 import DashboardLayout from "@/components/DashboardLayout";
 
 const students = [
-  { name: "Aman Kumar", roll: "ST001", status: "Online", seb: "Opened", network: "Stable" },
-  { name: "Neha Singh", roll: "ST002", status: "Online", seb: "Opened", network: "Stable" },
-  { name: "Ravi Verma", roll: "ST003", status: "Offline", seb: "Pending", network: "Issue" },
+  { name: "Aman Kumar", roll: "ST001", status: "Online", seb: "Opened", network: "Stable", examStatus: "In Progress", violationCount: 0, lastHeartbeat: "10:15 AM" },
+  { name: "Neha Singh", roll: "ST002", status: "Online", seb: "Opened", network: "Stable", examStatus: "In Progress", violationCount: 1, lastHeartbeat: "10:16 AM" },
+  { name: "Ravi Verma", roll: "ST003", status: "Offline", seb: "Pending", network: "Issue", examStatus: "Not Started", violationCount: 0, lastHeartbeat: "09:50 AM" },
+  { name: "Priya Sharma", roll: "ST004", status: "Online", seb: "Opened", network: "Stable", examStatus: "In Progress", violationCount: 0, lastHeartbeat: "10:14 AM" },
+  { name: "Kiran Patel", roll: "ST005", status: "Online", seb: "Opened", network: "Stable", examStatus: "In Progress", violationCount: 2, lastHeartbeat: "10:13 AM" },
 ];
 
 export default function TeacherMonitoringPage() {
@@ -36,6 +38,9 @@ export default function TeacherMonitoringPage() {
                 <div className="mt-2 flex flex-wrap gap-2 text-xs text-slate-600">
                   <span className="rounded-full bg-white px-2.5 py-1">SEB: {student.seb}</span>
                   <span className="rounded-full bg-white px-2.5 py-1">Network: {student.network}</span>
+                  <span className="rounded-full bg-white px-2.5 py-1">Exam: {student.examStatus}</span>
+                  <span className="rounded-full bg-white px-2.5 py-1">Violations: {student.violationCount}</span>
+                  <span className="rounded-full bg-white px-2.5 py-1">Last HB: {student.lastHeartbeat}</span>
                 </div>
               </div>
             ))}

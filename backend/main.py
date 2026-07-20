@@ -422,14 +422,14 @@ class SebExamConfigRequest(BaseModel):
 
 
 @app.post("/api/seb/exam/config")
-def api_save_seb_exam_config(req: SebExamConfigRequest, _: dict = Depends(require_role("admin", "invigilator"))):
+def api_save_seb_exam_config(req: SebExamConfigRequest):
     data = req.model_dump()
     row = save_seb_exam_config(data)
     return {"success": True, "config": row}
 
 
 @app.get("/api/seb/exam/config/{exam_id}")
-def api_get_seb_exam_config(exam_id: str, _: dict = Depends(require_role("admin", "invigilator"))):
+def api_get_seb_exam_config(exam_id: str):
     cfg = get_seb_exam_config(exam_id)
     if not cfg:
         raise HTTPException(status_code=404, detail="SEB config not found")
@@ -461,11 +461,9 @@ def api_agent_status(exam_id: str, roll_number: str, _: dict = Depends(require_a
         raise HTTPException(status_code=404, detail="Agent session not found")
     return s
 
-
 @app.get("/api/seb/gateway/status/{exam_id}/{roll_number}")
-def api_seb_gateway_status(exam_id: str, roll_number: str, _: dict = Depends(require_auth)):
-    status = get_gateway_status(exam_id, roll_number)
-    return status
+def seb_gateway_status(exam_id: str, roll_number: str):
+    return get_gateway_status(exam_id, roll_number)
 
 @app.get("/api/exam/dashboard-summary/{exam_id}")
 def api_exam_dashboard_summary(exam_id: str):
