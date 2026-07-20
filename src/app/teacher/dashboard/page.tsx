@@ -16,6 +16,12 @@ import {
 import DashboardLayout from "@/components/DashboardLayout";
 import StatsCard from "@/components/StatsCard";
 
+const BACKEND_URL =
+  process.env.NEXT_PUBLIC_BACKEND_URL || "http://127.0.0.1:8000";
+
+const FRONTEND_URL =
+  process.env.NEXT_PUBLIC_FRONTEND_URL || "http://localhost:3000";
+
 interface MonitorRow {
   rollNumber: string;
   studentName: string;
@@ -45,8 +51,8 @@ export default function TeacherDashboardPage() {
     const load = async () => {
       try {
         const [summaryRes, studentsRes] = await Promise.all([
-          fetch("http://127.0.0.1:8000/api/exam/dashboard-summary/EX001"),
-          fetch("http://127.0.0.1:8000/api/exam/students/EX001"),
+          fetch(`${BACKEND_URL}/api/exam/dashboard-summary/EX001`),
+          fetch(`${BACKEND_URL}/api/exam/students/EX001`),
         ]);
 
         if (summaryRes.ok) {
@@ -90,7 +96,7 @@ export default function TeacherDashboardPage() {
 
   const saveConfig = async () => {
     try {
-      await fetch("http://127.0.0.1:8000/api/seb/exam/config", {
+      await fetch(`${BACKEND_URL}/api/seb/exam/config`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -111,7 +117,7 @@ export default function TeacherDashboardPage() {
 
   const startExam = async () => {
     try {
-      await fetch("http://127.0.0.1:8000/api/exam/start", {
+      await fetch(`${BACKEND_URL}/api/exam/start`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -130,7 +136,7 @@ export default function TeacherDashboardPage() {
   };
 
   const copyGateway = async () => {
-    const url = `http://localhost:3000/seb/gateway?exam_id=${encodeURIComponent(examId)}&roll_number=student1`;
+    const url = `${FRONTEND_URL}/seb/gateway?exam_id=${encodeURIComponent(examId)}&roll_number=student1`;
     try {
       await navigator.clipboard.writeText(url);
       setMessage({ text: "Gateway URL copied to clipboard.", tone: "success" });
@@ -200,7 +206,7 @@ export default function TeacherDashboardPage() {
             </div>
             <div className="mt-4 rounded-2xl border border-slate-800 bg-slate-900/80 p-4 text-sm text-slate-300">
               <p className="font-medium text-white">Gateway URL</p>
-              <p className="mt-2 break-all text-slate-400">http://localhost:3000/seb/gateway?exam_id={examId}&roll_number=student1</p>
+              <p className="mt-2 break-all text-slate-400">{`${FRONTEND_URL}/seb/gateway?exam_id=${examId}&roll_number=student1`}</p>
             </div>
             <div className="mt-4 flex items-center gap-2 rounded-2xl border border-slate-800 bg-slate-900/80 p-4 text-sm text-slate-300">
               <CheckCircle2 size={16} className="text-emerald-400" />
